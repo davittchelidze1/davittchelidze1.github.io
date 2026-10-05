@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%23FFCB3D' stroke='%231C1626' stroke-width='4'/%3E%3Ctext x='32' y='41' font-family='Georgia,serif' font-size='24' text-anchor='middle' fill='%231C1626'%3EDT%3C/text%3E%3C/svg%3E">
+<link rel="canonical" href="https://davittchelidze1.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Davit Tchelidze">
+<meta property="og:description" content="Data engineer at Bank of Georgia. Pipelines, migrations, and side projects on GCP, Azure and AWS.">
+<meta property="og:url" content="https://davittchelidze1.github.io/">
+<meta property="og:image" content="https://davittchelidze1.github.io/photo.jpg">
+<meta name="twitter:card" content="summary">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Davit Tchelidze</title>
+<meta name="description" content="Davit Tchelidze (Dato), data engineer at Bank of Georgia in Tbilisi. Pipelines, migrations, side projects on GCP and Azure.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Noto+Sans+Georgian:wght@600;800&family=Young+Serif&display=swap">
+<style>
+/* Layout: full-bleed colour bands on white, left-aligned and a little crooked on purpose. Post-it, career staircase, before/after tickets, draggable stickers. */
+:root{
+  --paper:#FFFFFF; --paper-2:#F6F2FF; --ink:#1C1626; --ink-soft:#5B5366;
+  --line:#E6DFF0; --line-strong:#CBBFDD; --dot:#DDD3EC;
+  --link:#3653D9; --pen:#E2402F;
+  --hl:color-mix(in srgb,#FFCB3D 80%,transparent);
+  --mark:color-mix(in srgb,#2BBFAE 62%,transparent);
+  /* colour surfaces keep the same fill and dark text in both themes */
+  --tomato:#FF6B57; --sun:#FFCB3D; --teal:#2BBFAE; --sky:#7A9EFF; --pink:#FFA6CB; --lilac:#C1ABFF; --leaf:#97D883;
+  --bronze:#E0A574; --silver:#DCE2EA; --gold:#F7D25A;
+  --on-color:#1C1626; --white:#FFFFFF; --frost:rgba(255,255,255,.55);
+  --display:"Young Serif",Georgia,"Times New Roman",serif;
+  --body:"Figtree","Segoe UI",system-ui,-apple-system,sans-serif;
+  --hand:"Caveat","Segoe Print","Bradley Hand",cursive;
+  --geo:"Noto Sans Georgian","Sylfaen","DejaVu Sans",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#16121E; --paper-2:#1F1A29; --ink:#F4F0FA; --ink-soft:#B9AFC8;
+    --line:#2F283B; --line-strong:#4A4058; --dot:#2E2739;
+    --link:#A9B9FF; --pen:#FF8B7B;
+    --hl:color-mix(in srgb,#FFCB3D 32%,transparent);
+    --mark:color-mix(in srgb,#2BBFAE 45%,transparent);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#16121E; --paper-2:#1F1A29; --ink:#F4F0FA; --ink-soft:#B9AFC8;
+  --line:#2F283B; --line-strong:#4A4058; --dot:#2E2739;
+  --link:#A9B9FF; --pen:#FF8B7B;
+  --hl:color-mix(in srgb,#FFCB3D 32%,transparent);
+  --mark:color-mix(in srgb,#2BBFAE 45%,transparent);
+  color-scheme:dark;
+}
+
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:72rem;margin-inline:auto;padding-inline:clamp(16px,4vw,40px)}
+a{color:var(--link);text-underline-offset:3px;text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--link);outline-offset:3px;border-radius:6px}
+h1,h2,h3,h4{margin:0;font-weight:400;text-wrap:balance}
+p,ul,ol{margin:0}
+.ext::after{content:"\00a0\2197"}
+.kicker{display:inline-block;font-family:var(--hand);font-weight:700;font-size:1.7rem;line-height:1;color:var(--pen);transform:rotate(-2deg);transform-origin:left center}
+.h2{font-family:var(--display);font-size:clamp(2.1rem,4.8vw,3.5rem);line-height:1.05;letter-spacing:-.01em;margin-top:.4rem}
+.intro{max-width:60ch;margin-top:1.1rem;font-size:1.15rem;color:var(--ink-soft)}
+.intro b{color:var(--ink);font-weight:600}
+.band{padding-block:clamp(4rem,9vw,6.5rem)}
+.band.alt{background-color:var(--paper-2);background-image:radial-gradient(var(--dot) 1.3px,transparent 1.4px);background-size:24px 24px}
+.c-tomato{background:var(--tomato)} .c-sun{background:var(--sun)} .c-teal{background:var(--teal)} .c-sky{background:var(--sky)}
+.c-pink{background:var(--pink)} .c-lilac{background:var(--lilac)} .c-leaf{background:var(--leaf)}
+
+/* buttons */
+.pill{display:inline-flex;align-items:center;gap:.4rem;padding:.75rem 1.25rem;border-radius:999px;border:2px solid var(--on-color);background:var(--white);color:var(--on-color);font:700 1rem/1 var(--body);text-decoration:none;box-shadow:3px 3px 0 var(--on-color);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.pill:hover{transform:translate(-1px,-2px);box-shadow:5px 5px 0 var(--on-color)}
+.pill:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--on-color)}
+.pill.dark{background:var(--on-color);color:var(--white);box-shadow:3px 3px 0 var(--tomato)}
+.pill.dark:hover{box-shadow:5px 5px 0 var(--tomato)}
+.pill.sun{background:var(--sun)} .pill.sky{background:var(--sky)}
+
+/* header */
+.top .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 28px;padding-block:18px}
+.logo{display:inline-flex;align-items:center;gap:.7rem;color:var(--ink);text-decoration:none;font-weight:700;font-size:1.05rem}
+.logo-dot{display:grid;place-items:center;width:2.7rem;height:2.7rem;border-radius:50%;background:var(--sun);color:var(--on-color);border:2px solid var(--on-color);font-family:var(--display);font-size:1rem;transform:rotate(-10deg)}
+.top nav{display:flex;flex-wrap:wrap;gap:4px 22px}
+.top nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:.97rem;padding-block:3px;background:linear-gradient(var(--c),var(--c)) no-repeat left 90%/0 .4em;transition:background-size .2s}
+.top nav a:hover{background-size:100% .4em}
+.top nav a:nth-child(1){--c:var(--teal)} .top nav a:nth-child(2){--c:var(--sun)} .top nav a:nth-child(3){--c:var(--sky)}
+.top nav a:nth-child(4){--c:var(--pink)} .top nav a:nth-child(5){--c:var(--tomato)}
+
+/* hero */
+.hero{padding-block:clamp(2rem,5vw,3.5rem) clamp(3.5rem,8vw,5.5rem)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:clamp(3rem,6vw,5rem);align-items:center}
+.hello{display:flex;flex-wrap:wrap;align-items:baseline;gap:.15rem .8rem}
+.hello .ka{font-family:var(--geo);font-weight:800;font-size:clamp(1.35rem,2.4vw,1.7rem);color:var(--pen)}
+.hello .hand{font-family:var(--hand);font-size:1.5rem;color:var(--ink-soft)}
+.big{font-family:var(--display);font-size:clamp(2.5rem,6.3vw,4.9rem);line-height:1.06;letter-spacing:-.015em;margin:.9rem 0 1.6rem}
+.squig{position:relative;display:inline-block}
+.squig svg{position:absolute;left:-3%;bottom:-.14em;width:106%;height:.34em;overflow:visible;pointer-events:none}
+.squig path{fill:none;stroke:var(--tomato);stroke-width:6;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.lede{font-size:clamp(1.1rem,1.6vw,1.25rem);max-width:54ch;color:var(--ink-soft)}
+.lede b{color:var(--ink);font-weight:600}
+.cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:2rem}
+
+.mark{background:linear-gradient(100deg,transparent .5%,var(--mark) 2%,var(--mark) 97%,transparent 99.5%) no-repeat 0 90%/100% .42em;-webkit-box-decoration-break:clone;box-decoration-break:clone;padding-inline:.06em}
+.photo-wrap{position:relative;justify-self:center;width:min(100%,22rem);margin-top:1rem}
+.polaroid{position:relative;margin:0;background:var(--white);padding:.85rem .85rem 0;border:1px solid rgba(0,0,0,.08);transform:rotate(-3deg);box-shadow:0 26px 36px -22px rgba(0,0,0,.6);transition:transform .25s}
+.polaroid:hover{transform:rotate(-1deg) scale(1.01)}
+.polaroid img{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:var(--silver)}
+.polaroid figcaption{font-family:var(--hand);font-weight:700;font-size:1.7rem;line-height:1;color:var(--on-color);text-align:center;padding:.9rem 0 1.05rem}
+.story-top{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(2.5rem,5vw,4rem);align-items:center}
+.story-top .postit{justify-self:center;width:min(100%,22rem)}
+.postit{position:relative;background:var(--sun);color:var(--on-color);padding:2.1rem 1.6rem 1.7rem;transform:rotate(2.2deg);border-radius:3px 3px 26px 3px;box-shadow:0 22px 30px -20px rgba(0,0,0,.5)}
+.tape{position:absolute;top:-13px;left:50%;width:104px;height:28px;transform:translateX(-50%) rotate(-5deg);background:var(--frost);border:1px solid rgba(0,0,0,.06)}
+.postit-h{font-family:var(--hand);font-weight:700;font-size:2rem;line-height:1;margin-bottom:.7rem}
+.postit ul{list-style:none;padding:0}
+.postit li{padding-block:.42rem;border-bottom:1.5px dashed rgba(28,22,38,.28);font-size:.98rem;line-height:1.4}
+.postit li:last-child{border-bottom:0}
+.postit b{font-weight:700}
+.postit .ka{font-family:var(--geo);font-weight:600}
+.round{position:absolute;left:-1.6rem;bottom:-2.2rem;display:grid;place-items:center;width:7.2rem;height:7.2rem;border-radius:50%;background:var(--teal);color:var(--on-color);border:2px solid var(--on-color);font-family:var(--hand);font-weight:700;font-size:1.3rem;line-height:1.05;text-align:center;padding:.6rem;transform:rotate(-12deg);box-shadow:3px 4px 0 var(--on-color)}
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:minmax(0,1fr)}
+  .photo-wrap{justify-self:start;width:min(calc(100% - 1.5rem),20rem);margin-left:1.5rem;margin-bottom:1.5rem}
+  .story-top{grid-template-columns:minmax(0,1fr)}
+  .story-top .postit{justify-self:start;margin-left:.5rem}
+}
+
+/* ribbon */
+.ribbon{overflow:hidden;padding-block:1.4rem}
+.ribbon-band{background:var(--tomato);color:var(--on-color);border-block:2px solid var(--on-color);transform:rotate(-1.6deg);margin-inline:-2rem;overflow:hidden}
+.ribbon-track{display:flex;width:max-content;animation:slide 38s linear infinite}
+.ribbon-track span{font-family:var(--display);font-size:clamp(1.25rem,2.6vw,1.75rem);white-space:nowrap;padding:.6rem 0}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* story */
+.stairs{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;gap:10px;height:clamp(310px,34vw,390px);margin-top:3rem}
+.step{display:flex;flex-direction:column;gap:.3rem;padding:.9rem;border:2px solid var(--on-color);border-radius:18px 18px 6px 6px;color:var(--on-color);text-decoration:none;min-width:0;box-shadow:3px 3px 0 var(--on-color);transition:transform .18s}
+.step:hover{transform:translateY(-5px)}
+.step .yr{font-family:var(--hand);font-weight:700;font-size:1.7rem;line-height:1}
+.step .ttl{font-weight:700;font-size:.95rem;line-height:1.25;overflow-wrap:anywhere}
+.s1{height:32%} .s2{height:49%} .s3{height:66%} .s4{height:83%} .s5{height:100%}
+.here{position:absolute;top:0;right:calc(20% + 14px);display:flex;align-items:flex-start;gap:2px;font-family:var(--hand);font-weight:700;font-size:1.7rem;line-height:1;color:var(--pen);white-space:nowrap}
+.here svg{width:56px;height:36px;flex:none;margin-top:8px}
+.here path{fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:700px){
+  .stairs{grid-template-columns:minmax(0,1fr);height:auto;gap:9px;align-items:start}
+  .stairs .step{height:auto;flex-direction:row;align-items:baseline;gap:.8rem;padding:.7rem .95rem;border-radius:6px 18px 18px 6px}
+  .s1{width:58%} .s2{width:68%} .s3{width:79%} .s4{width:89%} .s5{width:100%}
+  .here{position:static;justify-self:end;font-size:1.5rem}
+  .here svg{display:none}
+  .here::before{content:"\2191\00a0"}
+}
+
+.roles{list-style:none;padding:0;margin-top:3.5rem;display:grid;gap:1.2rem}
+.role{display:grid;grid-template-columns:4.8rem minmax(0,1fr);gap:1.3rem;padding:1.5rem;background:var(--paper);border:2px solid var(--line);border-radius:24px;scroll-margin-top:1.5rem}
+.badge{display:grid;place-items:center;width:4.8rem;height:4.8rem;border-radius:50%;border:2px solid var(--on-color);color:var(--on-color);font-family:var(--hand);font-weight:700;font-size:1.6rem;line-height:1}
+.role h3{font-family:var(--display);font-size:clamp(1.35rem,2.4vw,1.7rem);line-height:1.2}
+.r-org{color:var(--ink-soft);margin:.15rem 0 .8rem;font-weight:500}
+.now{display:inline-block;font-family:var(--hand);font-weight:700;font-size:1.35rem;line-height:1;color:var(--pen);transform:rotate(-4deg);margin-left:.35rem}
+.role ul{padding-left:1.15rem;display:grid;gap:.5rem;max-width:70ch}
+.role li::marker{color:var(--pen)}
+@media (max-width:560px){
+  .role{grid-template-columns:minmax(0,1fr);gap:.9rem;padding:1.25rem}
+  .badge{width:3.6rem;height:3.6rem;font-size:1.3rem}
+}
+
+/* moves */
+.moves{list-style:none;padding:0;margin-top:3rem;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
+.move{position:relative;padding:1.35rem 1.4rem 1.5rem;border:2px solid var(--on-color);border-radius:22px;color:var(--on-color);box-shadow:4px 4px 0 var(--on-color);transform:rotate(var(--r,0deg));transition:transform .2s}
+.move:hover{transform:rotate(0deg) translateY(-3px)}
+.move:nth-child(3n+1){--r:-1.3deg} .move:nth-child(3n+2){--r:1deg} .move:nth-child(3n){--r:-.4deg}
+.m-when{font-family:var(--hand);font-weight:700;font-size:1.35rem;line-height:1}
+.old{position:relative;display:inline-block;margin-top:.8rem;font-weight:600;font-size:1.05rem;opacity:.72}
+.old::after{content:"";position:absolute;left:-5%;right:-5%;top:52%;height:3px;border-radius:3px;background:var(--on-color);transform:rotate(-4deg)}
+.new{display:block;font-family:var(--display);font-size:1.55rem;line-height:1.15;margin-top:.2rem}
+.new::before{content:"\2192\00a0"}
+.move p{margin-top:.7rem;font-size:.98rem;line-height:1.5}
+.move .scribble{display:block;margin-top:.7rem;font-family:var(--hand);font-weight:700;font-size:1.4rem;line-height:1.1;transform:rotate(-2deg)}
+@media (max-width:960px){.moves{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.moves{grid-template-columns:minmax(0,1fr)}.move:nth-child(n){--r:0deg}}
+
+/* projects */
+.projects{display:grid;gap:1.6rem;margin-top:3rem}
+.panel{border:2px solid var(--on-color);border-radius:32px;padding:clamp(1.4rem,3.6vw,2.6rem);color:var(--on-color);box-shadow:5px 5px 0 var(--on-color);min-width:0}
+.panel a{color:var(--on-color);font-weight:700}
+.panel p{max-width:64ch;margin-top:.9rem}
+.p-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:1rem}
+.chip{display:inline-block;padding:.22rem .7rem;border-radius:999px;background:var(--frost);border:1.5px solid var(--on-color);font-size:.82rem;font-weight:600;line-height:1.4}
+.chip.flag{background:var(--on-color);color:var(--white)}
+.panel h3{font-family:var(--display);font-size:clamp(1.7rem,3.4vw,2.45rem);line-height:1.1}
+.flow{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);gap:.6rem;align-items:stretch;margin-top:1.7rem}
+.layer{border:2px solid var(--on-color);border-radius:18px;padding:.9rem 1rem;min-width:0}
+.layer.bronze{background:var(--bronze)} .layer.silver{background:var(--silver)} .layer.gold{background:var(--gold)}
+.layer b{display:block;font-family:var(--hand);font-size:1.6rem;line-height:1}
+.layer .what{display:block;font-size:.9rem;line-height:1.35;margin-top:.3rem}
+.layer .val{display:block;font-family:var(--display);font-size:1.3rem;line-height:1.15;margin-top:.55rem}
+.arr{align-self:center;font-family:var(--hand);font-weight:700;font-size:2.2rem;line-height:1}
+@media (max-width:760px){.flow{grid-template-columns:minmax(0,1fr)}.arr{justify-self:center;transform:rotate(90deg)}}
+.nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem;margin-top:1.8rem}
+.num strong{display:block;font-family:var(--display);font-size:clamp(2.3rem,4.6vw,3.3rem);font-weight:400;line-height:1}
+.num span{display:block;font-size:.97rem;line-height:1.4;margin-top:.4rem}
+@media (max-width:640px){.nums{grid-template-columns:minmax(0,1fr)}}
+.panel .scribble{display:inline-block;margin-top:1.5rem;font-family:var(--hand);font-weight:700;font-size:1.5rem;line-height:1.15;transform:rotate(-1.5deg);max-width:42ch}
+.p-row{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:1.6rem;align-items:stretch}
+.p-stack{display:grid;grid-template-rows:auto 1fr;gap:1.6rem;min-width:0}
+@media (max-width:900px){.p-row{grid-template-columns:minmax(0,1fr)}}
+.learned{margin-top:1.5rem;padding:1.1rem 1.25rem;border-radius:20px;background:var(--frost);border:2px dashed var(--on-color)}
+.learned h4{font-family:var(--hand);font-weight:700;font-size:1.6rem;line-height:1;margin-bottom:.55rem}
+.learned ul{padding-left:1.1rem;display:grid;gap:.5rem}
+.panel .go{display:inline-block;margin-top:1.4rem}
+.p-links{display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;margin-top:1.4rem}
+.p-links .go{margin-top:0}
+.now-list{list-style:none;padding:0;margin-top:1rem;display:grid;gap:.7rem}
+.now-list li{display:grid;grid-template-columns:1.6rem minmax(0,1fr);gap:.4rem;align-items:baseline}
+.now-list li::before{content:"\2610";font-size:1.3rem;line-height:1}
+
+/* toolbox */
+.board{position:relative;display:flex;flex-wrap:wrap;gap:16px 12px;padding:2.2rem clamp(1rem,3vw,2.2rem);margin-top:2.5rem;border:2px dashed var(--line-strong);border-radius:30px;overflow:hidden;background:var(--paper)}
+.stk{position:relative;display:inline-block;padding:.55rem 1.05rem;border-radius:999px;border:2px solid var(--on-color);color:var(--on-color);font-weight:700;font-size:1rem;line-height:1.2;transform:translate(var(--x,0px),var(--y,0px)) rotate(var(--r,0deg));box-shadow:2px 3px 0 var(--on-color);user-select:none;-webkit-user-select:none}
+.stk:nth-child(5n+1){--r:-3deg} .stk:nth-child(5n+2){--r:2deg} .stk:nth-child(5n+3){--r:-1deg} .stk:nth-child(5n+4){--r:3.5deg} .stk:nth-child(5n){--r:-2deg}
+.drag-hint{display:none;font-family:var(--hand);font-weight:700;font-size:1.5rem;color:var(--pen);transform:rotate(-2deg);margin-top:1.2rem}
+@media (pointer:fine){
+  .stk{cursor:grab}
+  .stk.dragging{cursor:grabbing;z-index:5;box-shadow:6px 8px 0 var(--on-color)}
+  .drag-hint{display:inline-block}
+}
+.legend{display:flex;flex-wrap:wrap;gap:.5rem 1.3rem;margin-top:1.1rem;font-size:.95rem;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:.45rem}
+.legend i{display:inline-block;width:.9rem;height:.9rem;border-radius:50%;border:1.5px solid var(--on-color)}
+
+/* school */
+.school{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(2rem,5vw,4rem);margin-top:3rem;align-items:start}
+.sub-h{font-family:var(--hand);font-weight:700;font-size:1.8rem;line-height:1;margin-bottom:1rem}
+.edu{list-style:none;padding:0;display:grid;gap:1rem}
+.edu li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.15rem 1rem;padding:1.2rem 1.35rem;border:2px solid var(--line);border-radius:22px;background:var(--paper)}
+.edu .dot{grid-row:1/span 3;width:1.15rem;height:1.15rem;margin-top:.4rem;border-radius:50%;border:2px solid var(--on-color)}
+.edu h4{font-family:var(--display);font-size:1.22rem;line-height:1.25}
+.edu .meta{color:var(--ink-soft);font-size:.97rem}
+.hl{background:linear-gradient(transparent 48%,var(--hl) 48%,var(--hl) 92%,transparent 92%);padding-inline:.15em;font-weight:600;color:var(--ink)}
+.c-list{list-style:none;padding:0}
+.c-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.3rem 1rem;align-items:center;padding-block:.75rem;border-bottom:2px dotted var(--line-strong)}
+.c-list li:first-child{border-top:2px dotted var(--line-strong)}
+.c-name{font-weight:600;min-width:0}
+.c-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:.5rem .7rem}
+.iss{padding:.12rem .6rem;border-radius:999px;border:1.5px solid var(--on-color);color:var(--on-color);font-size:.78rem;font-weight:700;white-space:nowrap}
+.c-date{font-family:var(--hand);font-weight:700;font-size:1.3rem;line-height:1;color:var(--ink-soft);white-space:nowrap;min-width:4.6rem;text-align:right}
+@media (max-width:900px){.school{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.c-list li{grid-template-columns:minmax(0,1fr)}.c-meta{justify-content:flex-start}.c-date{text-align:left;min-width:0}}
+
+/* contact */
+.contact{background:var(--tomato);color:var(--on-color);padding-block:clamp(4rem,9vw,7rem);border-top:2px solid var(--on-color)}
+.contact .kicker{color:var(--on-color)}
+.say{font-family:var(--display);font-size:clamp(3.4rem,12vw,8.5rem);line-height:.95;letter-spacing:-.02em;margin-top:.3rem}
+.contact .lead{font-size:1.2rem;max-width:46ch;margin-top:1.2rem}
+.mail{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;margin-top:2.2rem}
+.mail-addr{font-family:var(--display);font-size:clamp(1.45rem,4.2vw,2.5rem);line-height:1.2;overflow-wrap:anywhere;min-width:0;border-bottom:3px solid var(--on-color)}
+.contact .links{display:flex;flex-wrap:wrap;gap:14px;margin-top:1.8rem}
+footer{background:var(--on-color);color:var(--white)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 1.5rem;padding-block:1.4rem 1.8rem;font-size:.95rem}
+footer .hand{font-family:var(--hand);font-size:1.35rem;font-weight:700;line-height:1}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .ribbon-track{animation:none}
+  .pill,.step,.move{transition:none}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="logo-dot" aria-hidden="true">DT</span>Davit Tchelidze</a>
+    <nav aria-label="Sections">
+      <a href="#story">My story</a>
+      <a href="#moves">Migrations</a>
+      <a href="#projects">Projects</a>
+      <a href="#toolbox">Toolbox</a>
+      <a href="#contact">Say hi</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero wrap" aria-labelledby="hi">
+    <div class="hero-grid">
+      <div>
+        <p class="hello"><span class="ka" lang="ka">გამარჯობა!</span><span class="hand">(that's "hello" in Georgian)</span></p>
+        <h1 class="big" id="hi">I'm Davit, and I build <span class="squig">data pipelines<svg viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true"><path d="M3 9 C 30 3, 55 13, 85 7 S 140 2, 165 8 S 192 10, 197 6"/></svg></span> at <span class="mark">Bank of Georgia.</span></h1>
+        <p class="lede">My job is making sure the bank's financial data gets where it needs to go, on time and correct. Day to day that means <b>Spark, Airflow, SQL and Python</b> on Kubernetes. I'm based in Tbilisi, and on the side I build pipelines on GCP and Azure to see how other clouds solve the same problems.</p>
+        <div class="cta">
+          <a class="pill dark" href="#contact">Say hi</a>
+          <a class="pill sun ext" href="https://www.linkedin.com/in/davit-tchelidze-78a7b226a/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="pill sky ext" href="https://github.com/davittchelidze1" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="photo-wrap">
+        <figure class="polaroid">
+          <span class="tape" aria-hidden="true"></span>
+          <img src="photo.jpg" width="400" height="400" alt="Davit standing outside at night, lit by red street lights, looking to the side">
+          <figcaption>that's me!</figcaption>
+        </figure>
+        <span class="round" aria-hidden="true">Spark + Airflow since 2024</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="ribbon" aria-hidden="true">
+    <div class="ribbon-band">
+      <div class="ribbon-track">
+        <span>&nbsp;Apache Spark ✦ Airflow ✦ SQL ✦ Python ✦ Iceberg ✦ Kubernetes ✦ BigQuery ✦ Oracle PL/SQL ✦ Terraform ✦ Delta Lake ✦ Docker ✦ PostgreSQL ✦&nbsp;</span>
+        <span>&nbsp;Apache Spark ✦ Airflow ✦ SQL ✦ Python ✦ Iceberg ✦ Kubernetes ✦ BigQuery ✦ Oracle PL/SQL ✦ Terraform ✦ Delta Lake ✦ Docker ✦ PostgreSQL ✦&nbsp;</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="band alt" id="story" aria-labelledby="story-h">
+    <div class="wrap">
+      <div class="story-top">
+        <div>
+          <span class="kicker">the story so far</span>
+          <h2 class="h2" id="story-h">How I got here</h2>
+          <p class="intro">I joined Bank of Georgia in 2023 as a <b>PL/SQL intern</b>, while I was still finishing my BA at the International School of Economics. Three years and four job titles later, I <b>own production pipelines</b> for the bank's financial data. Here's the climb.</p>
+        </div>
+        <aside class="postit" aria-label="Quick facts">
+          <span class="tape" aria-hidden="true"></span>
+          <p class="postit-h">quick facts</p>
+          <ul>
+            <li><b>Name:</b> Davit Tchelidze (Dato is fine)</li>
+            <li><b>Job:</b> Middle Data Engineer 2, Bank of Georgia</li>
+            <li><b>Been at it:</b> 3 years, 4 job titles, 1 bank</li>
+            <li><b>Studying:</b> MA in Information Systems (DevOps)</li>
+            <li><b>Speaks:</b> <span class="ka" lang="ka">ქართული</span> and English (C1)</li>
+            <li><b>Lives in:</b> Tbilisi, GMT+4</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="stairs" role="list" aria-label="Career steps, oldest to newest">
+        <a class="step s1 c-lilac" href="#role-tutor" role="listitem"><span class="yr">2022</span><span class="ttl">Maths tutor</span></a>
+        <a class="step s2 c-leaf" href="#role-intern" role="listitem"><span class="yr">2023</span><span class="ttl">PL/SQL intern</span></a>
+        <a class="step s3 c-sky" href="#role-junior" role="listitem"><span class="yr">2024</span><span class="ttl">Junior analyst developer</span></a>
+        <a class="step s4 c-teal" href="#role-mid1" role="listitem"><span class="yr">2025</span><span class="ttl">Middle Data Engineer 1</span></a>
+        <a class="step s5 c-tomato" href="#role-mid2" role="listitem"><span class="yr">2026</span><span class="ttl">Middle Data Engineer 2</span></a>
+        <span class="here" aria-hidden="true">you are here<svg viewBox="0 0 56 36"><path d="M2 6 C 18 2, 38 6, 48 26 M 40 22 L 48 27 L 50 18"/></svg></span>
+      </div>
+
+      <ol class="roles" reversed>
+        <li class="role" id="role-mid2">
+          <span class="badge c-tomato" aria-hidden="true">2026</span>
+          <div>
+            <h3>Middle Data Engineer 2 <span class="now">(now!)</span></h3>
+            <p class="r-org">Bank of Georgia · 2026 to today</p>
+            <ul>
+              <li>I own production ETL pipelines end to end, from design to delivery, for high-volume financial data where integrity and compliance really matter.</li>
+              <li>I look after our in-house Airflow framework. It builds DAGs from configuration in PostgreSQL, and handles custom operators and sensors, dependencies between DAGs, and making sure jobs don't run over each other.</li>
+              <li>I replaced a hardcoded IFRS balance module with a config-driven one, so changing a business rule now means editing one configuration layer.</li>
+              <li>I moved core financial pipelines from Delta Lake to Iceberg, moved orchestration from YARN to Kubernetes, and upgraded Airflow from 2 to 3.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="role" id="role-mid1">
+          <span class="badge c-teal" aria-hidden="true">2025</span>
+          <div>
+            <h3>Middle Data Engineer 1</h3>
+            <p class="r-org">Bank of Georgia · 2025 to 2026</p>
+            <ul>
+              <li>Built ingestion for sovereign and yield-curve data from scratch, with error handling that makes failures obvious.</li>
+              <li>Built our incremental-load setup (partition overwrite, initial loads, SCD2 and CDC) and used it to move provisioning and credit card data from PostgreSQL to HDFS.</li>
+              <li>Kept data quality and governance standards in check for the reporting systems downstream.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="role" id="role-junior">
+          <span class="badge c-sky" aria-hidden="true">2024</span>
+          <div>
+            <h3>Junior Analyst Developer</h3>
+            <p class="r-org">Bank of Georgia · 2024 to 2025</p>
+            <ul>
+              <li>Checked data quality across core financial datasets and caught discrepancies before they reached reports.</li>
+              <li>Got properly into Spark and Airflow. This is where I moved from databases to distributed data.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="role" id="role-intern">
+          <span class="badge c-leaf" aria-hidden="true">2023</span>
+          <div>
+            <h3>PL/SQL Developer Intern</h3>
+            <p class="r-org">Bank of Georgia · 2023 to 2024</p>
+            <ul>
+              <li>Redesigned a core IFRS reporting table from one flat legacy table into a partitioned and subpartitioned design. Queries got faster and it met the governance standards.</li>
+              <li>Wrote and maintained Oracle PL/SQL functions and packages for critical financial data.</li>
+              <li>Helped with ETL development and database tuning across core banking systems.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="role" id="role-tutor">
+          <span class="badge c-lilac" aria-hidden="true">2022</span>
+          <div>
+            <h3>Maths Tutor</h3>
+            <p class="r-org">Self-employed · 2022 to 2023</p>
+            <ul>
+              <li>Taught maths one to one. Explaining things clearly turns out to be a big part of engineering too.</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band" id="moves" aria-labelledby="moves-h">
+    <div class="wrap">
+      <span class="kicker">out with the old</span>
+      <h2 class="h2" id="moves-h">Things I've moved from A to B</h2>
+      <p class="intro">A big part of my work is migrations: taking something the bank depends on every day and moving it somewhere better without breaking anything.</p>
+      <ul class="moves">
+        <li class="move c-sun">
+          <span class="m-when">2026</span><br>
+          <span class="old">Delta Lake</span>
+          <span class="new">Iceberg + Polaris</span>
+          <p>Core financial pipelines, tested end to end on pre-production first.</p>
+          <span class="scribble">zero disruption to the daily financial close</span>
+        </li>
+        <li class="move c-pink">
+          <span class="m-when">2026</span><br>
+          <span class="old">YARN</span>
+          <span class="new">Kubernetes</span>
+          <p>I led the move of our pipeline orchestration onto Kubernetes.</p>
+        </li>
+        <li class="move c-teal">
+          <span class="m-when">2026</span><br>
+          <span class="old">Airflow 2</span>
+          <span class="new">Airflow 3</span>
+          <p>Upgraded, and swapped the old Vault-based secrets for injected environment variables along the way.</p>
+        </li>
+        <li class="move c-sky">
+          <span class="m-when">2026</span><br>
+          <span class="old">Hardcoded IFRS logic</span>
+          <span class="new">Config-driven rules</span>
+          <p>Business rules for IFRS balances now live in one configuration layer.</p>
+        </li>
+        <li class="move c-lilac">
+          <span class="m-when">2025</span><br>
+          <span class="old">PostgreSQL</span>
+          <span class="new">HDFS</span>
+          <p>Provisioning and credit card datasets, loaded incrementally with SCD2 and CDC.</p>
+        </li>
+        <li class="move c-leaf">
+          <span class="m-when">2023</span><br>
+          <span class="old">One flat IFRS table</span>
+          <span class="new">Partitioned + subpartitioned</span>
+          <p>Done as an intern. Faster queries, and it meets the governance standards.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band alt" id="projects" aria-labelledby="proj-h">
+    <div class="wrap">
+      <span class="kicker">side projects</span>
+      <h2 class="h2" id="proj-h">Things I build to learn</h2>
+      <p class="intro">At work I live in Spark, Airflow and Kubernetes. These projects are how I learn the public cloud versions of the same ideas.</p>
+
+      <div class="projects">
+        <article class="panel c-teal" aria-labelledby="p-gcp">
+          <div class="p-top">
+            <span class="chip flag">GCP</span>
+            <span class="chip">Cloud Storage</span><span class="chip">Dataproc Serverless</span><span class="chip">PySpark</span><span class="chip">BigQuery</span><span class="chip">Airflow</span><span class="chip">Terraform</span>
+          </div>
+          <h3 id="p-gcp">An orders lakehouse on GCP</h3>
+          <p>Raw orders land in Cloud Storage, sorted by the day they arrived. Each day, Spark reads only that day's files, cleans and dedupes them, and BigQuery rebuilds only the dates that changed. I tested it on about 31 million synthetic orders, with late arrivals, corrections, duplicates and one deliberately broken file, and measured everything.</p>
+
+          <div class="flow">
+            <div class="layer bronze"><b>bronze</b><span class="what">raw JSON, kept exactly as received</span><span class="val">166 MB a day</span></div>
+            <span class="arr" aria-hidden="true">→</span>
+            <div class="layer silver"><b>silver</b><span class="what">typed, validated, deduped Parquet</span><span class="val">1,009,830 rows on Aug 31</span></div>
+            <span class="arr" aria-hidden="true">→</span>
+            <div class="layer gold"><b>gold</b><span class="what">revenue by day and country in BigQuery</span><span class="val">only 7 dates rebuilt</span></div>
+          </div>
+
+          <div class="nums">
+            <div class="num"><strong>0</strong><span>mismatches when I reconciled the results for 30.7M orders against independent ground truth</span></div>
+            <div class="num"><strong>166 MB</strong><span>read per daily run, instead of rescanning all 5.4 GB of history</span></div>
+            <div class="num"><strong>&lt; $1</strong><span>estimated monthly cost, at a million orders a day</span></div>
+          </div>
+          <p>The lakehouse was the last day of a 14-day series where I moved what I know from the Hadoop stack over to Google Cloud, one topic a day: IAM, BigQuery, Dataproc, Pub/Sub, Dataflow, Terraform and more. All 14 days together cost $0.17 in credits.</p>
+          <span class="scribble">fun fact: a managed Airflow (Cloud Composer) would cost ~$300 a month. The orchestrator was the real bill!</span>
+          <div class="p-links">
+            <a class="go ext" href="https://github.com/davittchelidze1/gcp-data-engineering/tree/main/day14-capstone-lakehouse" target="_blank" rel="noopener">See the lakehouse code</a>
+            <a class="go ext" href="https://github.com/davittchelidze1/gcp-data-engineering" target="_blank" rel="noopener">All 14 days on GitHub</a>
+          </div>
+        </article>
+
+        <div class="p-row">
+          <article class="panel c-sky" aria-labelledby="p-az">
+            <div class="p-top">
+              <span class="chip flag">Azure</span>
+              <span class="chip">Service Bus</span><span class="chip">ADLS Gen2</span><span class="chip">Redis</span><span class="chip">Functions</span><span class="chip">Key Vault</span>
+            </div>
+            <h3 id="p-az">An event-driven order pipeline on Azure</h3>
+            <p>A seven-day plan to learn Azure's data and messaging services properly, with 4 of 7 days done so far. Everything is set up from the command line, and every service signs in with a managed identity, so there are no passwords or keys anywhere in the code.</p>
+            <p>Orders arrive in Blob Storage, go through Service Bus, and end up as bronze, silver and gold Parquet in a data lake. The consumer is idempotent: 4 deliveries of the same orders produce exactly 3 invoices.</p>
+            <div class="learned">
+              <h4>things I learned the hard way</h4>
+              <ul>
+                <li>An Azure "Owner" can't read what's inside a blob. Managing a resource and reading its data are separate permissions.</li>
+                <li>Turning on blob versioning quietly changes what "delete" means.</li>
+                <li>Azure stopped offering its Cache for Redis halfway through my project, so the Redis part runs in Docker instead.</li>
+              </ul>
+            </div>
+            <a class="go ext" href="https://github.com/Datochela/azure-order-pipeline" target="_blank" rel="noopener">See the code on GitHub</a>
+          </article>
+
+          <div class="p-stack">
+            <article class="panel c-sun" aria-labelledby="p-aws">
+              <div class="p-top"><span class="chip flag">AWS</span><span class="chip">Python</span><span class="chip">boto3</span><span class="chip">Lambda</span></div>
+              <h3 id="p-aws">Everyday AWS, in Python</h3>
+              <p>Command-line tools on boto3 that I built while learning AWS at university. There's an S3 tool for buckets, policies, versioning, lifecycle rules and static hosting, scripts that build a VPC and set up EC2 with MySQL on RDS, and a Lambda that runs every uploaded image through four Hugging Face models.</p>
+              <a class="go ext" href="https://github.com/davittchelidze1/awss3" target="_blank" rel="noopener">See the code on GitHub</a>
+            </article>
+            <article class="panel c-pink" aria-labelledby="p-now">
+              <h3 id="p-now">Right now I'm…</h3>
+              <ul class="now-list">
+                <li>preparing for the Databricks Data Engineer Associate exam</li>
+                <li>doing my MA in Information Systems (DevOps) at BTU</li>
+                <li>getting into Dataform and Datastream</li>
+                <li>working through days 5 to 7 of the Azure project</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="toolbox" aria-labelledby="tools-h">
+    <div class="wrap">
+      <span class="kicker">the toolbox</span>
+      <h2 class="h2" id="tools-h">What I work with</h2>
+      <div class="board" id="board" role="list" aria-label="Skills">
+        <span class="stk c-teal" role="listitem">Apache Airflow</span>
+        <span class="stk c-sun" role="listitem">Python</span>
+        <span class="stk c-teal" role="listitem">Apache Spark</span>
+        <span class="stk c-sun" role="listitem">SQL (advanced)</span>
+        <span class="stk c-lilac" role="listitem">Kubernetes</span>
+        <span class="stk c-teal" role="listitem">Iceberg</span>
+        <span class="stk c-sky" role="listitem">BigQuery</span>
+        <span class="stk c-pink" role="listitem">Oracle</span>
+        <span class="stk c-sun" role="listitem">PL/SQL</span>
+        <span class="stk c-teal" role="listitem">Delta Lake</span>
+        <span class="stk c-lilac" role="listitem">Docker</span>
+        <span class="stk c-sky" role="listitem">Dataproc</span>
+        <span class="stk c-pink" role="listitem">PostgreSQL</span>
+        <span class="stk c-leaf" role="listitem">Jenkins</span>
+        <span class="stk c-teal" role="listitem">Databricks</span>
+        <span class="stk c-lilac" role="listitem">Terraform</span>
+        <span class="stk c-sky" role="listitem">Cloud Storage</span>
+        <span class="stk c-leaf" role="listitem">GitLab CI</span>
+        <span class="stk c-teal" role="listitem">Apache Hive</span>
+        <span class="stk c-sky" role="listitem">AWS S3</span>
+        <span class="stk c-sun" role="listitem">Node.js</span>
+        <span class="stk c-teal" role="listitem">Hadoop</span>
+        <span class="stk c-sky" role="listitem">AWS RDS</span>
+        <span class="stk c-pink" role="listitem">MongoDB</span>
+        <span class="stk c-lilac" role="listitem">YARN</span>
+        <span class="stk c-sky" role="listitem">DynamoDB</span>
+        <span class="stk c-leaf" role="listitem">Git</span>
+        <span class="stk c-sky" role="listitem">AWS EC2</span>
+        <span class="stk c-sky" role="listitem">Azure Service Bus</span>
+      </div>
+      <div class="legend" aria-label="Colour key">
+        <span><i class="c-teal"></i>big data</span>
+        <span><i class="c-sun"></i>languages</span>
+        <span><i class="c-sky"></i>cloud</span>
+        <span><i class="c-lilac"></i>infrastructure</span>
+        <span><i class="c-leaf"></i>CI/CD and Git</span>
+        <span><i class="c-pink"></i>databases</span>
+      </div>
+      <span class="drag-hint">psst, you can drag the stickers around</span>
+    </div>
+  </section>
+
+  <section class="band alt" id="school" aria-labelledby="school-h">
+    <div class="wrap">
+      <span class="kicker">school and courses</span>
+      <h2 class="h2" id="school-h">Where I learned it</h2>
+      <div class="school">
+        <div>
+          <h3 class="sub-h">Degrees</h3>
+          <ul class="edu">
+            <li>
+              <span class="dot c-tomato" aria-hidden="true"></span>
+              <h4>Business and Technology University</h4>
+              <span class="meta">MA, Information Systems (DevOps) · 2025 to now</span>
+              <span class="meta"><span class="hl">100% state scholarship</span></span>
+            </li>
+            <li>
+              <span class="dot c-sky" aria-hidden="true"></span>
+              <h4>International School of Economics, Tbilisi State University</h4>
+              <span class="meta">BA · 2021 to 2025 · GPA 3.65 / 4.0</span>
+              <span class="meta"><span class="hl">100% state scholarship</span></span>
+            </li>
+            <li>
+              <span class="dot c-leaf" aria-hidden="true"></span>
+              <h4>Komarovi School</h4>
+              <span class="meta">Secondary school · 2015 to 2021</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="sub-h">Courses I've finished</h3>
+          <ul class="c-list">
+            <li><span class="c-name"><a class="ext" href="https://verify.skilljar.com/c/wcmi3d73ud6r" target="_blank" rel="noopener">Claude with Amazon Bedrock</a></span><span class="c-meta"><span class="iss c-lilac">Anthropic</span><span class="c-date">Jun 2026</span></span></li>
+            <li><span class="c-name">Databricks Data Engineering (Associate prep)</span><span class="c-meta"><span class="iss c-pink">Udemy</span><span class="c-date">May 2026</span></span></li>
+            <li><span class="c-name"><a class="ext" href="https://verify.skilljar.com/c/vj8stt4dqt97" target="_blank" rel="noopener">Claude Code in Action</a></span><span class="c-meta"><span class="iss c-lilac">Anthropic</span><span class="c-date">Apr 2026</span></span></li>
+            <li><span class="c-name"><a class="ext" href="https://verify.skilljar.com/c/fodwykjfgsj5" target="_blank" rel="noopener">Introduction to Agent Skills</a></span><span class="c-meta"><span class="iss c-lilac">Anthropic</span><span class="c-date">Apr 2026</span></span></li>
+            <li><span class="c-name"><a class="ext" href="https://verify.skilljar.com/c/rmxkzthj5c4b" target="_blank" rel="noopener">Introduction to Subagents</a></span><span class="c-meta"><span class="iss c-lilac">Anthropic</span><span class="c-date">Apr 2026</span></span></li>
+            <li><span class="c-name"><a class="ext" href="https://verify.skilljar.com/c/psps336m6mfq" target="_blank" rel="noopener">Claude 101</a></span><span class="c-meta"><span class="iss c-lilac">Anthropic</span><span class="c-date">Apr 2026</span></span></li>
+            <li><span class="c-name">The Complete Node.js Developer Course</span><span class="c-meta"><span class="iss c-pink">Udemy</span><span class="c-date">Apr 2026</span></span></li>
+            <li><span class="c-name"><a class="ext" href="https://www.coursera.org/account/accomplishments/specialization/EAZH9HVI4HX1" target="_blank" rel="noopener">Machine Learning Specialization</a></span><span class="c-meta"><span class="iss c-sky">DeepLearning.AI</span><span class="c-date">Sep 2024</span></span></li>
+            <li><span class="c-name"><a class="ext" href="https://www.coursera.org/account/accomplishments/verify/NC4R9VN7HPDW" target="_blank" rel="noopener">AI For Everyone</a></span><span class="c-meta"><span class="iss c-sky">DeepLearning.AI</span><span class="c-date">Apr 2024</span></span></li>
+            <li><span class="c-name"><a class="ext" href="https://tbcbank.ge/ka/tbc-education/risks-academy" target="_blank" rel="noopener">Risks Academy</a></span><span class="c-meta"><span class="iss c-teal">TBC Academy</span><span class="c-date">Mar 2024</span></span></li>
+            <li><span class="c-name"><a class="ext" href="https://certificates.cs50.io/06524143-3c81-4ac6-ac68-3cf4bbbe6bf7.pdf?size=letter" target="_blank" rel="noopener">CS50's Introduction to Programming with Python</a></span><span class="c-meta"><span class="iss c-leaf">Harvard</span><span class="c-date">Sep 2023</span></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="say-h">
+    <div class="wrap">
+      <span class="kicker">don't be shy</span>
+      <h2 class="say" id="say-h">Say hi!</h2>
+      <p class="lead">Want to talk about data, pipelines, or working together? Email me or find me on LinkedIn.</p>
+      <div class="mail">
+        <span class="mail-addr" id="email-text">dato7.dc@gmail.com</span>
+        <button class="pill dark" type="button" id="copy-email" data-copy="dato7.dc@gmail.com">Copy email</button>
+      </div>
+      <div class="links">
+        <a class="pill ext" href="https://www.linkedin.com/in/davit-tchelidze-78a7b226a/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="pill ext" href="https://github.com/davittchelidze1" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="hand">made in Tbilisi</span>
+    <span>Davit Tchelidze · 2026</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // copy email
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    var label = btn.textContent;
+    function show(msg) {
+      btn.textContent = msg;
+      clearTimeout(btn._t);
+      btn._t = setTimeout(function () { btn.textContent = label; }, 2000);
+    }
+    function fallback() {
+      try {
+        var r = document.createRange();
+        r.selectNodeContents(document.getElementById('email-text'));
+        var s = window.getSelection();
+        s.removeAllRanges();
+        s.addRange(r);
+        show('Selected, press Ctrl+C');
+      } catch (e) { show('Copy it from above'); }
+    }
+    btn.addEventListener('click', function () {
+      try {
+        navigator.clipboard.writeText(btn.dataset.copy).then(function () { show('Copied!'); }, fallback);
+      } catch (e) { fallback(); }
+    });
+  });
+
+  // draggable stickers (mouse / trackpad only, so touch scrolling still works)
+  if (!window.matchMedia || !matchMedia('(pointer: fine)').matches) return;
+  var top = 10;
+  document.querySelectorAll('.stk').forEach(function (el) {
+    var ox = 0, oy = 0;
+    el.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0) return;
+      e.preventDefault();
+      var sx = e.clientX - ox, sy = e.clientY - oy;
+      el.setPointerCapture(e.pointerId);
+      el.classList.add('dragging');
+      el.style.zIndex = ++top;
+      function move(ev) {
+        ox = ev.clientX - sx; oy = ev.clientY - sy;
+        el.style.setProperty('--x', ox + 'px');
+        el.style.setProperty('--y', oy + 'px');
+      }
+      function up() {
+        el.classList.remove('dragging');
+        el.removeEventListener('pointermove', move);
+        el.removeEventListener('pointerup', up);
+        el.removeEventListener('pointercancel', up);
+      }
+      el.addEventListener('pointermove', move);
+      el.addEventListener('pointerup', up);
+      el.addEventListener('pointercancel', up);
+    });
+  });
+})();
+</script>
+</body>
+</html>
