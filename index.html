@@ -7,7 +7,7 @@
 <link rel="canonical" href="https://davittchelidze1.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Davit Tchelidze">
-<meta property="og:description" content="Data engineer at Bank of Georgia. Pipelines, migrations, and side projects on GCP, Azure and AWS.">
+<meta property="og:description" content="Data engineer at Bank of Georgia. Pipelines, migrations, and side projects on GCP and AWS.">
 <meta property="og:url" content="https://davittchelidze1.github.io/">
 <meta property="og:image" content="https://davittchelidze1.github.io/photo.jpg">
 <meta name="twitter:card" content="summary">
@@ -203,9 +203,8 @@ p,ul,ol{margin:0}
 .num span{display:block;font-size:.97rem;line-height:1.4;margin-top:.4rem}
 @media (max-width:640px){.nums{grid-template-columns:minmax(0,1fr)}}
 .panel .scribble{display:inline-block;margin-top:1.5rem;font-family:var(--hand);font-weight:700;font-size:1.5rem;line-height:1.15;transform:rotate(-1.5deg);max-width:42ch}
-.p-row{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:1.6rem;align-items:stretch}
-.p-stack{display:grid;grid-template-rows:auto 1fr;gap:1.6rem;min-width:0}
-@media (max-width:900px){.p-row{grid-template-columns:minmax(0,1fr)}}
+.p-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.6rem;align-items:stretch}
+@media (max-width:820px){.p-row{grid-template-columns:minmax(0,1fr)}}
 .learned{margin-top:1.5rem;padding:1.1rem 1.25rem;border-radius:20px;background:var(--frost);border:2px dashed var(--on-color)}
 .learned h4{font-family:var(--hand);font-weight:700;font-size:1.6rem;line-height:1;margin-bottom:.55rem}
 .learned ul{padding-left:1.1rem;display:grid;gap:.5rem}
@@ -310,8 +309,8 @@ footer .hand{font-family:var(--hand);font-size:1.35rem;font-weight:700;line-heig
   <div class="ribbon" aria-hidden="true">
     <div class="ribbon-band">
       <div class="ribbon-track">
-        <span>&nbsp;Apache Spark ✦ Airflow ✦ SQL ✦ Python ✦ Iceberg ✦ Kubernetes ✦ BigQuery ✦ Oracle PL/SQL ✦ Terraform ✦ Delta Lake ✦ Docker ✦ PostgreSQL ✦&nbsp;</span>
-        <span>&nbsp;Apache Spark ✦ Airflow ✦ SQL ✦ Python ✦ Iceberg ✦ Kubernetes ✦ BigQuery ✦ Oracle PL/SQL ✦ Terraform ✦ Delta Lake ✦ Docker ✦ PostgreSQL ✦&nbsp;</span>
+        <span>&nbsp;Apache Spark ✦ Airflow ✦ SQL ✦ Python ✦ Iceberg ✦ Polaris ✦ MinIO ✦ Kubernetes ✦ BigQuery ✦ Oracle PL/SQL ✦ Terraform ✦ Delta Lake ✦ Docker ✦ PostgreSQL ✦&nbsp;</span>
+        <span>&nbsp;Apache Spark ✦ Airflow ✦ SQL ✦ Python ✦ Iceberg ✦ Polaris ✦ MinIO ✦ Kubernetes ✦ BigQuery ✦ Oracle PL/SQL ✦ Terraform ✦ Delta Lake ✦ Docker ✦ PostgreSQL ✦&nbsp;</span>
       </div>
     </div>
   </div>
@@ -357,7 +356,7 @@ footer .hand{font-family:var(--hand);font-size:1.35rem;font-weight:700;line-heig
               <li>I own production ETL pipelines end to end, from design to delivery, for high-volume financial data where integrity and compliance really matter.</li>
               <li>I look after our in-house Airflow framework. It builds DAGs from configuration in PostgreSQL, and handles custom operators and sensors, dependencies between DAGs, and making sure jobs don't run over each other.</li>
               <li>I replaced a hardcoded IFRS balance module with a config-driven one, so changing a business rule now means editing one configuration layer.</li>
-              <li>I moved core financial pipelines from Delta Lake to Iceberg, moved orchestration from YARN to Kubernetes, and upgraded Airflow from 2 to 3.</li>
+              <li>I moved core financial pipelines from Hive and HDFS to Iceberg tables on Polaris and MinIO, moved orchestration from YARN to Kubernetes, and upgraded Airflow from 2 to 3.</li>
             </ul>
           </div>
         </li>
@@ -368,7 +367,7 @@ footer .hand{font-family:var(--hand);font-size:1.35rem;font-weight:700;line-heig
             <p class="r-org">Bank of Georgia · 2025 to 2026</p>
             <ul>
               <li>Built ingestion for sovereign and yield-curve data from scratch, with error handling that makes failures obvious.</li>
-              <li>Built our incremental-load setup (partition overwrite, initial loads, SCD2 and CDC) and used it to move provisioning and credit card data from PostgreSQL to HDFS.</li>
+              <li>Built our incremental-load setup (partition overwrite, initial loads, SCD2 and CDC) and used it to move provisioning and credit card data from PostgreSQL into our Delta Lake warehouse.</li>
               <li>Kept data quality and governance standards in check for the reporting systems downstream.</li>
             </ul>
           </div>
@@ -418,9 +417,9 @@ footer .hand{font-family:var(--hand);font-size:1.35rem;font-weight:700;line-heig
       <ul class="moves">
         <li class="move c-sun">
           <span class="m-when">2026</span><br>
-          <span class="old">Delta Lake</span>
-          <span class="new">Iceberg + Polaris</span>
-          <p>Core financial pipelines, tested end to end on pre-production first.</p>
+          <span class="old">Hive + HDFS</span>
+          <span class="new">Polaris + MinIO</span>
+          <p>Core financial pipelines moved to Iceberg tables, with Polaris as the catalog and MinIO for storage. Tested end to end on pre-production first.</p>
           <span class="scribble">zero disruption to the daily financial close</span>
         </li>
         <li class="move c-pink">
@@ -444,7 +443,7 @@ footer .hand{font-family:var(--hand);font-size:1.35rem;font-weight:700;line-heig
         <li class="move c-lilac">
           <span class="m-when">2025</span><br>
           <span class="old">PostgreSQL</span>
-          <span class="new">HDFS</span>
+          <span class="new">Delta Lake warehouse</span>
           <p>Provisioning and credit card datasets, loaded incrementally with SCD2 and CDC.</p>
         </li>
         <li class="move c-leaf">
@@ -494,42 +493,20 @@ footer .hand{font-family:var(--hand);font-size:1.35rem;font-weight:700;line-heig
         </article>
 
         <div class="p-row">
-          <article class="panel c-sky" aria-labelledby="p-az">
-            <div class="p-top">
-              <span class="chip flag">Azure</span>
-              <span class="chip">Service Bus</span><span class="chip">ADLS Gen2</span><span class="chip">Redis</span><span class="chip">Functions</span><span class="chip">Key Vault</span>
-            </div>
-            <h3 id="p-az">An event-driven order pipeline on Azure</h3>
-            <p>A seven-day plan to learn Azure's data and messaging services properly, with 4 of 7 days done so far. Everything is set up from the command line, and every service signs in with a managed identity, so there are no passwords or keys anywhere in the code.</p>
-            <p>Orders arrive in Blob Storage, go through Service Bus, and end up as bronze, silver and gold Parquet in a data lake. The consumer is idempotent: 4 deliveries of the same orders produce exactly 3 invoices.</p>
-            <div class="learned">
-              <h4>things I learned the hard way</h4>
-              <ul>
-                <li>An Azure "Owner" can't read what's inside a blob. Managing a resource and reading its data are separate permissions.</li>
-                <li>Turning on blob versioning quietly changes what "delete" means.</li>
-                <li>Azure stopped offering its Cache for Redis halfway through my project, so the Redis part runs in Docker instead.</li>
-              </ul>
-            </div>
-            <a class="go ext" href="https://github.com/Datochela/azure-order-pipeline" target="_blank" rel="noopener">See the code on GitHub</a>
+          <article class="panel c-sun" aria-labelledby="p-aws">
+            <div class="p-top"><span class="chip flag">AWS</span><span class="chip">Python</span><span class="chip">boto3</span><span class="chip">Lambda</span></div>
+            <h3 id="p-aws">Everyday AWS, in Python</h3>
+            <p>Command-line tools on boto3 that I built while learning AWS at university. There's an S3 tool for buckets, policies, versioning, lifecycle rules and static hosting, scripts that build a VPC and set up EC2 with MySQL on RDS, and a Lambda that runs every uploaded image through four Hugging Face models.</p>
+            <a class="go ext" href="https://github.com/davittchelidze1/awss3" target="_blank" rel="noopener">See the code on GitHub</a>
           </article>
-
-          <div class="p-stack">
-            <article class="panel c-sun" aria-labelledby="p-aws">
-              <div class="p-top"><span class="chip flag">AWS</span><span class="chip">Python</span><span class="chip">boto3</span><span class="chip">Lambda</span></div>
-              <h3 id="p-aws">Everyday AWS, in Python</h3>
-              <p>Command-line tools on boto3 that I built while learning AWS at university. There's an S3 tool for buckets, policies, versioning, lifecycle rules and static hosting, scripts that build a VPC and set up EC2 with MySQL on RDS, and a Lambda that runs every uploaded image through four Hugging Face models.</p>
-              <a class="go ext" href="https://github.com/davittchelidze1/awss3" target="_blank" rel="noopener">See the code on GitHub</a>
-            </article>
-            <article class="panel c-pink" aria-labelledby="p-now">
-              <h3 id="p-now">Right now I'm…</h3>
-              <ul class="now-list">
-                <li>preparing for the Databricks Data Engineer Associate exam</li>
-                <li>doing my MA in Information Systems (DevOps) at BTU</li>
-                <li>getting into Dataform and Datastream</li>
-                <li>working through days 5 to 7 of the Azure project</li>
-              </ul>
-            </article>
-          </div>
+          <article class="panel c-pink" aria-labelledby="p-now">
+            <h3 id="p-now">Right now I'm…</h3>
+            <ul class="now-list">
+              <li>preparing for the Databricks Data Engineer Associate exam</li>
+              <li>doing my MA in Information Systems (DevOps) at BTU</li>
+              <li>getting into Dataform and Datastream</li>
+            </ul>
+          </article>
         </div>
       </div>
     </div>
@@ -568,7 +545,8 @@ footer .hand{font-family:var(--hand);font-size:1.35rem;font-weight:700;line-heig
         <span class="stk c-sky" role="listitem">DynamoDB</span>
         <span class="stk c-leaf" role="listitem">Git</span>
         <span class="stk c-sky" role="listitem">AWS EC2</span>
-        <span class="stk c-sky" role="listitem">Azure Service Bus</span>
+        <span class="stk c-teal" role="listitem">Apache Polaris</span>
+        <span class="stk c-lilac" role="listitem">MinIO</span>
       </div>
       <div class="legend" aria-label="Colour key">
         <span><i class="c-teal"></i>big data</span>
