@@ -7,7 +7,7 @@
 <link rel="canonical" href="https://davittchelidze1.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Davit Tchelidze">
-<meta property="og:description" content="Data engineer at Bank of Georgia. Pipelines, migrations, and side projects on GCP and AWS.">
+<meta property="og:description" content="Data engineer at Bank of Georgia. I move a bank's financial data to new platforms without breaking the daily close.">
 <meta property="og:url" content="https://davittchelidze1.github.io/">
 <meta property="og:image" content="https://davittchelidze1.github.io/photo.jpg">
 <meta name="twitter:card" content="summary">
@@ -286,12 +286,13 @@ footer .hand{font-family:var(--hand);font-size:1.35rem;font-weight:700;line-heig
     <div class="hero-grid">
       <div>
         <p class="hello"><span class="ka" lang="ka">გამარჯობა!</span><span class="hand">(that's "hello" in Georgian)</span></p>
-        <h1 class="big" id="hi">I'm Davit, and I build data <span class="squig">pipelines<svg viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true"><path d="M3 9 C 30 3, 55 13, 85 7 S 140 2, 165 8 S 192 10, 197 6"/></svg></span> at <span class="mark">Bank of Georgia.</span></h1>
-        <p class="lede">My job is making sure the bank's financial data gets where it needs to go, on time and correct. Day to day that means <b>Spark, Airflow, SQL and Python</b> on Kubernetes. I'm based in Tbilisi, and on the side I build pipelines on GCP and AWS to see how other clouds solve the same problems.</p>
+        <h1 class="big" id="hi">I'm Davit. I move a bank's data to new platforms while it's <span class="squig">running.<svg viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true"><path d="M3 9 C 30 3, 55 13, 85 7 S 140 2, 165 8 S 192 10, 197 6"/></svg></span></h1>
+        <p class="lede">I'm a data engineer at <span class="mark"><b>Bank of Georgia</b></span> in Tbilisi. This year I moved its core financial pipelines from Hive to Iceberg, from YARN to Kubernetes and from Airflow 2 to 3, with <b>zero disruption to the daily financial close</b>. Day to day that's Spark, Airflow, SQL and Python. On the side I build the same kind of pipelines on GCP and AWS.</p>
         <div class="cta">
           <a class="pill dark" href="#contact">Say hi</a>
           <a class="pill sun ext" href="https://www.linkedin.com/in/davit-tchelidze-78a7b226a/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="pill sky ext" href="https://github.com/davittchelidze1" target="_blank" rel="noopener">GitHub</a>
+          <a class="pill" href="Davit_Tchelidze_CV.pdf" download>Download CV</a>
         </div>
       </div>
 
@@ -353,10 +354,10 @@ footer .hand{font-family:var(--hand);font-size:1.35rem;font-weight:700;line-heig
             <h3>Middle Data Engineer 2 <span class="now">(now!)</span></h3>
             <p class="r-org">Bank of Georgia · 2026 to today</p>
             <ul>
-              <li>I own production ETL pipelines end to end, from design to delivery, for high-volume financial data where integrity and compliance really matter.</li>
-              <li>I look after our in-house Airflow framework. It builds DAGs from configuration in PostgreSQL, and handles custom operators and sensors, dependencies between DAGs, and making sure jobs don't run over each other.</li>
+              <li>I own production ETL pipelines end to end, from design to delivery: about 50 GB of new financial data a day, on top of roughly a terabyte already stored, where integrity and compliance really matter.</li>
+              <li>I look after our in-house Airflow framework, which runs about 50 DAGs. It builds them from configuration in PostgreSQL, and handles custom operators and sensors, dependencies between DAGs, and making sure jobs don't run over each other.</li>
               <li>I replaced a hardcoded IFRS balance module with a config-driven one, so changing a business rule now means editing one configuration layer.</li>
-              <li>I moved core financial pipelines from Hive and HDFS to Iceberg tables on Polaris and MinIO, moved orchestration from YARN to Kubernetes, and upgraded Airflow from 2 to 3.</li>
+              <li>I led this year's platform migrations: Hive to Iceberg, YARN to Kubernetes, Airflow 2 to 3. <a href="#moves">More on those below.</a></li>
             </ul>
           </div>
         </li>
@@ -389,7 +390,7 @@ footer .hand{font-family:var(--hand);font-size:1.35rem;font-weight:700;line-heig
             <h3>PL/SQL Developer Intern</h3>
             <p class="r-org">Bank of Georgia · 2023 to 2024</p>
             <ul>
-              <li>Redesigned a core IFRS reporting table from one flat legacy table into a partitioned and subpartitioned design. Queries got faster and it met the governance standards.</li>
+              <li>Redesigned a core IFRS reporting table from one flat legacy table into a partitioned and subpartitioned design. Key queries got about 10× faster and it met the governance standards.</li>
               <li>Wrote and maintained Oracle PL/SQL functions and packages for critical financial data.</li>
               <li>Helped with ETL development and database tuning across core banking systems.</li>
             </ul>
@@ -427,6 +428,7 @@ footer .hand{font-family:var(--hand);font-size:1.35rem;font-weight:700;line-heig
           <span class="old">YARN</span>
           <span class="new">Kubernetes</span>
           <p>I led the move of our pipeline orchestration onto Kubernetes.</p>
+          <span class="scribble">faster runs, lower cost, fewer failures, easier scaling</span>
         </li>
         <li class="move c-teal">
           <span class="m-when">2026</span><br>
@@ -450,7 +452,8 @@ footer .hand{font-family:var(--hand);font-size:1.35rem;font-weight:700;line-heig
           <span class="m-when">2023</span><br>
           <span class="old">One flat IFRS table</span>
           <span class="new">Partitioned + subpartitioned</span>
-          <p>Done as an intern. Faster queries, and it meets the governance standards.</p>
+          <p>Done as an intern. It meets the governance standards.</p>
+          <span class="scribble">queries ~10× faster</span>
         </li>
       </ul>
     </div>
@@ -482,7 +485,7 @@ footer .hand{font-family:var(--hand);font-size:1.35rem;font-weight:700;line-heig
           <div class="nums">
             <div class="num"><strong>0</strong><span>mismatches when I reconciled the results for 30.7M orders against independent ground truth</span></div>
             <div class="num"><strong>166 MB</strong><span>read per daily run, instead of rescanning all 5.4 GB of history</span></div>
-            <div class="num"><strong>&lt; $1</strong><span>estimated monthly cost, at a million orders a day</span></div>
+            <div class="num"><strong>&lt; $1</strong><span>estimated monthly storage + compute at a million orders a day (orchestration not included, see below)</span></div>
           </div>
           <p>The lakehouse was the last day of a 14-day series where I moved what I know from the Hadoop stack over to Google Cloud, one topic a day: IAM, BigQuery, Dataproc, Pub/Sub, Dataflow, Terraform and more. All 14 days together cost $0.17 in credits.</p>
           <span class="scribble">fun fact: a managed Airflow (Cloud Composer) would cost ~$300 a month. The orchestrator was the real bill!</span>
@@ -619,6 +622,7 @@ footer .hand{font-family:var(--hand);font-size:1.35rem;font-weight:700;line-heig
       <div class="links">
         <a class="pill ext" href="https://www.linkedin.com/in/davit-tchelidze-78a7b226a/" target="_blank" rel="noopener">LinkedIn</a>
         <a class="pill ext" href="https://github.com/davittchelidze1" target="_blank" rel="noopener">GitHub</a>
+        <a class="pill" href="Davit_Tchelidze_CV.pdf" download>Download CV</a>
       </div>
     </div>
   </section>
